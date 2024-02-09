@@ -8,6 +8,32 @@ class Source(str, Enum):
     file = "file"
     chat = "chat"
 
+'''
+Giving Tree example metadata
+metadata_field_info = [
+    AttributeInfo(
+        name="year",
+        description="The year the document was published",
+        type="integer"
+    ),
+    AttributeInfo(
+        name="title",
+        description="The title of the document",
+        type="string"
+    ),
+    AttributeInfo(
+        name="author",
+        description="The author of the document",
+        type="string"
+    ),
+    AttributeInfo(
+        name="segment_num",
+        description="The segment number of the document",
+        type="integer"
+    )
+]
+
+'''
 
 class DocumentMetadata(BaseModel):
     source: Optional[Source] = None
