@@ -1,4 +1,4 @@
-create extension vector;
+create extension if not exists vector;
 
 create table if not exists documents (
     id text primary key default gen_random_uuid()::text,
