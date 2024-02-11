@@ -25,8 +25,12 @@ def get_embeddings(texts: List[str]) -> List[List[float]]:
     deployment = os.environ.get("OPENAI_EMBEDDINGMODEL_DEPLOYMENTID")
 
     response = {}
+    '''
     if deployment == None:
         response = openai.Embedding.create(input=texts, model="text-embedding-ada-002")
+    '''
+    if deployment == None:
+        response = openai.Embedding.create(input=texts, model=os.environ.get("EMBEDDING_MODEL"), dimensions=int(os.environ.get("EMBEDDING_DIMENSION")))
     else:
         response = openai.Embedding.create(input=texts, deployment_id=deployment)
 

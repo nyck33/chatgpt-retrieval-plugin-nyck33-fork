@@ -53,8 +53,14 @@ else:
     spacy_segments = []
 
 #%% 
-# write out the segments to a .csv 
+# check each spacy_segment for excessive white space
+print(spacy_segments[0])
+# each spacy segment should not have more than one space between words or punctuation and words
+for i in range(len(spacy_segments)):
+    spacy_segments[i] = ' '.join(spacy_segments[i].split())
+    print(spacy_segments[i], "\n")
 
+#%%
 # make dataframe of three columns: segment_num, segment_text, embedding
 import pandas as pd
 
@@ -65,6 +71,7 @@ loaded_from_file = False
 if os.path.isfile('embeddings.csv'):
     df = pd.read_csv('embeddings.csv', index_col='segment_num')
     spacy_segments = df['segment_text'].tolist()
+    loaded_from_file = True
 else:
     # Assuming spacy_segments is a list of text segments
     df = pd.DataFrame({
@@ -115,6 +122,10 @@ else:
 
 print(len(embeddings), len(embeddings[0]), embeddings[0])
 '''
+# %%
+# check df text column for excessive white space
+print(df['segment_text'][0])
+# for 
 #%%
 # look at embeddings
 print(len(embeddings), len(embeddings[0]), type(embeddings[0]))
@@ -131,7 +142,7 @@ for content in spacy_segments:
     # Assuming `generate_embedding` is a function that converts your string to an embedding
     embedding = embeddings[j]
     data = {
-        "source": "some website",
+        "source": "file", #email, chat or file enum
         "source_id": "The Giving Tree text only",
         "content": content,
         "document_id": "Giving Tree doc " + str(j),

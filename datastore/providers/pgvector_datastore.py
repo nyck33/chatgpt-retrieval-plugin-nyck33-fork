@@ -127,6 +127,7 @@ class PgVectorDataStore(DataStore):
                         to_unix_timestamp(query.filter.end_date)
                     )
             try:
+                logger.debug(f"RPC params: {params}")
                 data = await self.client.rpc("match_page_sections", params=params)
                 results: List[DocumentChunkWithScore] = []
                 for row in data:
