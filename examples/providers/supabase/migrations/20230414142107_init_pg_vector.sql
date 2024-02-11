@@ -9,7 +9,7 @@ create table if not exists documents (
     author text,
     url text,
     created_at timestamptz default now(),
-    embedding vector(1536)
+    embedding vector(256)
 );
 
 create index ix_documents_document_id on documents using btree ( document_id );
