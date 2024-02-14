@@ -32,6 +32,41 @@ paths:
                 $ref: "#/components/schemas/HTTPValidationError"
       security:
         - HTTPBearer: []
+  /upsert-file:
+    post:
+      summary: Upsert File
+      description: Uploads a file and optional metadata, processes the file, and stores it in the vector database.
+      operationId: upsert_file_upsert_file_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to be uploaded.
+                metadata:
+                  type: string
+                  description: Optional metadata for the file in JSON format.
+        required: true
+      responses:
+        "200":
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpsertResponse"
+        "422":
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+      security:
+        - HTTPBearer: []
+
   /query:
     post:
       summary: Query
